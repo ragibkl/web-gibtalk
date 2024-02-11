@@ -66,7 +66,7 @@ export default function ImageSearchPage() {
 
       <main>
         <div className="bg-white">
-          <div className="container mx-auto max-w-screen-lg p-10">
+          <div className="container mx-auto max-w-screen-lg p-10 min-h-screen">
             <p className="text-4xl">Search</p>
 
             <div>
