@@ -29,7 +29,7 @@ export default function ImageSearchPage() {
   const [imageResults, setImageResults] = useState<ImageResult[]>([]);
   const [isFetching, setIsFetching] = useState(false);
 
-  const onSubmitSearch = async () => {
+  const doSearch = async () => {
     setIsFetching(true);
     try {
       const results = await getSearchSymbols(searchTerm);
@@ -44,6 +44,16 @@ export default function ImageSearchPage() {
   const onChangeSearchTerm = (event: React.ChangeEvent<HTMLInputElement>) => {
     let text = event.target.value;
     setSearchTerm(text);
+  };
+
+  const onKeyDown = async (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      doSearch();
+    }
+  };
+
+  const onClickSearch = async () => {
+    doSearch();
   };
 
   return (
@@ -64,10 +74,16 @@ export default function ImageSearchPage() {
                 className="border"
                 type="text"
                 onChange={onChangeSearchTerm}
-                onSubmit={onSubmitSearch}
+                onKeyDown={onKeyDown}
                 value={searchTerm}
               />
-              <button onClick={onSubmitSearch}>Search</button>
+              <button
+                type="button"
+                onClick={onClickSearch}
+                className="rounded border-2 px-4 m-2"
+              >
+                Search
+              </button>
             </div>
 
             <div>
