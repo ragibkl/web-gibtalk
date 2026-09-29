@@ -1,0 +1,249 @@
+/* The template builder. Preact renders it, so Astro's scoped styles can't
+   reach it; everything is prefixed with b- instead. */
+
+.builder button,
+.builder input,
+.builder select {
+  font: inherit;
+}
+
+.builder .button {
+  cursor: pointer;
+  padding: 0.5rem 0.9rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.builder .button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.builder .button.danger {
+  background: #ffd6d6;
+}
+
+.builder .link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.builder input[type="text"],
+.builder input[type="search"],
+.builder select {
+  width: 100%;
+  min-width: 0;
+  padding: 0.5rem 0.7rem;
+  border: 3px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.b-bar {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.b-name span,
+.b-fields label span {
+  display: block;
+  font-weight: 700;
+}
+
+.b-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.builder .b-template {
+  width: auto;
+  flex: 1 1 14rem;
+}
+
+.b-message {
+  margin: 0;
+}
+
+.b-crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  margin-top: 1.5rem;
+  font-weight: 700;
+}
+
+.b-crumbs [aria-current="page"] {
+  color: var(--text);
+  text-decoration: none;
+  cursor: default;
+}
+
+.b-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.b-cell {
+  display: grid;
+  justify-items: center;
+  gap: 0.2rem;
+}
+
+.b-tile,
+.b-add {
+  width: 7.5rem;
+  padding: 0.5rem;
+  border: 3px solid var(--border);
+  border-radius: 12px;
+  color: #141414;
+  cursor: pointer;
+}
+
+.b-tile.folder,
+.b-add.folder {
+  background: var(--folder);
+}
+
+.b-tile.word,
+.b-add.word {
+  background: var(--word);
+}
+
+.b-tile.selected {
+  outline: 4px solid var(--link);
+  outline-offset: 3px;
+}
+
+.b-tile img,
+.b-empty,
+.b-picture img {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  margin: 0 auto;
+  object-fit: contain;
+  background: #ffffff;
+  border: 2px solid #141414;
+  border-radius: 6px;
+  color: #777777;
+  font-size: 0.8rem;
+}
+
+.b-label {
+  display: block;
+  margin-top: 0.35rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.b-open {
+  font-size: 0.9rem;
+}
+
+.b-adds {
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+}
+
+.b-add {
+  font-weight: 700;
+  padding-block: 0.9rem;
+  border-style: dashed;
+}
+
+.b-editor {
+  margin-top: 1.5rem;
+}
+
+.b-editor h3 {
+  margin-top: 0.25rem;
+}
+
+.b-editor h4 {
+  margin: 1rem 0 0.4rem;
+}
+
+.b-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: end;
+}
+
+.b-fields label {
+  flex: 1 1 12rem;
+  min-width: 0;
+}
+
+.b-picture {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.b-picture img,
+.b-picture .b-empty {
+  margin: 0;
+}
+
+.b-search {
+  margin-top: 0.75rem;
+}
+
+.b-search form {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.b-search p {
+  margin: 0.4rem 0;
+}
+
+.b-results {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-height: 22rem;
+  overflow-y: auto;
+}
+
+.b-results button {
+  padding: 0.25rem;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.b-results img {
+  display: block;
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.b-editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}

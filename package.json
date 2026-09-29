@@ -11,9 +11,11 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/preact": "^6.0.5",
     "@astrojs/sitemap": "^3.7.4",
     "@fontsource/atkinson-hyperlegible": "^5.3.0",
     "astro": "^7.3.5",
+    "preact": "^10.29.8",
     "sharp": "^0.35.5",
     "yaml": "^2.9.1"
   },

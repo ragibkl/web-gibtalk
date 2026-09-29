@@ -1,0 +1,88 @@
+---
+import Base from "../layouts/Base.astro";
+import Builder from "../components/builder/Builder";
+import { SITE } from "../lib/site";
+import { getTemplates } from "../lib/templates";
+import "../styles/builder.css";
+
+// Browsers fetch templates from raw.githubusercontent.com, which allows it;
+// the github.com/raw links the app uses redirect without CORS headers.
+const templates = (await getTemplates()).map((t) => ({
+  name: t.name,
+  description: t.description,
+  url: t.file.replace(
+    "https://github.com/ragibkl/GibTalk/raw/",
+    "https://raw.githubusercontent.com/ragibkl/GibTalk/",
+  ),
+}));
+---
+
+<Base
+  title="Template builder"
+  description="Build a set of GibTalk words on a computer, with pictures, and download it as a file to restore on a phone or tablet."
+>
+  <h1>Template builder</h1>
+  <p class="lead">
+    Build a set of words on a computer, with a bigger screen and a keyboard,
+    then put it on a phone or tablet. For a teacher or therapist preparing a
+    board for a child, or a parent setting up a new device.
+  </p>
+
+  <ol class="steps">
+    <li>
+      Tap <strong>+ Word</strong> or <strong>+ Folder</strong>, give it a name,
+      and pick a symbol or use your own photo.
+    </li>
+    <li>
+      Or start from a <a href="/templates/">template</a>, or open a GibTalk
+      backup file to change it.
+    </li>
+    <li>Download the file when you're done.</li>
+  </ol>
+
+  <Builder client:only="preact" templates={templates} />
+  <noscript>
+    <p class="card">The builder needs JavaScript turned on.</p>
+  </noscript>
+
+  <h2>Putting it on a device</h2>
+  <ol>
+    <li>Send the file to the phone or tablet: email, chat, or cloud drive.</li>
+    <li>
+      In GibTalk, tap <strong>Edit</strong>, then <strong>Restore</strong>, and
+      choose the file.
+    </li>
+  </ol>
+  <p>
+    <strong>Restore replaces every word already on the device.</strong> If
+    there's anything to keep, tap <strong>Backup</strong> first, then open that
+    backup here with <em>Open a file</em>, add your new words to it, and restore
+    the result.
+  </p>
+
+  <h2>Share it with other families</h2>
+  <p>
+    If your set would help other children too, it could become a template anyone
+    can add from the app.
+    <a href={SITE.issues}>Open an issue on GitHub</a> and attach the file.
+    Symbols only, please: photos of real people or places stay with you.
+  </p>
+
+  <h2>Your privacy</h2>
+  <p>
+    The builder runs in your browser. Your words and photos aren't uploaded
+    anywhere; the file is made on your computer. Only symbol searches go to the
+    <a href="/symbols/">symbols server</a>. Your work in progress is kept in
+    this browser, and <em>Start over</em> clears it.
+  </p>
+</Base>
+
+<style>
+  .lead {
+    font-size: 1.2rem;
+    margin-top: 0.75rem;
+  }
+  .steps {
+    margin-bottom: 1.5rem;
+  }
+</style>
