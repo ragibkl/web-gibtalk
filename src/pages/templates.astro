@@ -1,0 +1,119 @@
+---
+import Base from "../layouts/Base.astro";
+import WordTile from "../components/WordTile.astro";
+import { SITE } from "../lib/site";
+import { countWords, getTemplates, LANGUAGES } from "../lib/templates";
+
+const templates = await getTemplates();
+
+function languageOf(words: { language?: string }[]): string {
+  const lang = words.find((w) => w.language)?.language ?? "";
+  return LANGUAGES[lang] ?? lang;
+}
+---
+
+<Base
+  title="Templates"
+  description="Ready-made GibTalk word sets for greetings, mealtime, play and more, in English and Malay."
+>
+  <h1>Templates</h1>
+  <p class="lead">
+    Ready-made word sets you can add to GibTalk in a couple of taps, instead of
+    building everything from scratch. Many were put together with teachers at an
+    early intervention centre, for the things children actually do each day.
+  </p>
+
+  <div class="card how">
+    <h2>How to add a template</h2>
+    <ol>
+      <li>
+        In GibTalk, tap <strong>Edit</strong>.
+      </li>
+      <li>
+        Tap <strong>Templates</strong>, and choose one.
+      </li>
+      <li>
+        Its words are <strong>added</strong> to your own. Nothing you already
+        have is removed.
+      </li>
+    </ol>
+    <p class="muted">
+      Yellow tiles are folders, with more words inside. Green tiles are words.
+    </p>
+  </div>
+
+  {templates.map((t) => (
+    <section
+      class="template"
+      id={t.file.split("/").pop()?.replace(".yaml", "")}
+    >
+      <h2>{t.name}</h2>
+      <p class="muted">
+        {t.description} · {languageOf(t.words)} · {countWords(t.words)} words
+      </p>
+      <div class="tiles">
+        {t.words.map((w) => (
+          <WordTile word={w} />
+        ))}
+      </div>
+      {t.words
+        .filter((w) => w.children?.length)
+        .map((folder) => (
+          <details class="folder">
+            <summary>
+              Inside {folder.label} ({countWords(folder.children ?? [])} words)
+            </summary>
+            <div class="tiles">
+              {folder.children?.map((w) => (
+                <WordTile word={w} />
+              ))}
+            </div>
+          </details>
+        ))}
+    </section>
+  ))}
+
+  <div class="card suggest">
+    <h2>Suggest a template</h2>
+    <p>
+      Teachers, therapists and parents: if you've built a set of words that
+      works well, it could help other families too.
+      <a href={SITE.issues}>Open an issue on GitHub</a> describing it, or attach
+      a GibTalk backup file of just those words.
+    </p>
+  </div>
+</Base>
+
+<style>
+  .lead {
+    font-size: 1.2rem;
+    margin-top: 0.75rem;
+  }
+  .how {
+    margin-top: 1.5rem;
+  }
+  .how h2,
+  .suggest h2 {
+    margin-top: 0.25rem;
+    font-size: 1.3rem;
+  }
+  .template h2 {
+    margin-bottom: 0.25rem;
+  }
+  .tiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .folder {
+    margin-top: 1rem;
+  }
+  .folder summary {
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .suggest {
+    margin-top: 3rem;
+  }
+</style>
