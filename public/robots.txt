@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gibtalk.ragib.dev/sitemap-index.xml

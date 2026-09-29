@@ -1,0 +1,68 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE } from "../lib/site";
+---
+
+<Base
+  title="Privacy policy"
+  description="GibTalk doesn't collect or store any of your data."
+>
+  <h1>Privacy policy</h1>
+  <p class="muted">Last updated: 29 September 2026</p>
+
+  <p>
+    GibTalk doesn't collect or store any of your data, or track how you use it.
+    There's no account, no login, no analytics, no advertising, and no cookies
+    or unique identifiers.
+  </p>
+
+  <h2>Your words and pictures</h2>
+  <p>
+    Everything you add stays on your device: your words, their pictures and any
+    photos you take. GibTalk works offline. Nothing is uploaded.
+  </p>
+  <p>
+    Backups are files saved on your device. Where they go after that is up to
+    you.
+  </p>
+
+  <h2>When GibTalk goes online</h2>
+  <ul>
+    <li>
+      <strong>Searching symbols</strong> sends your search words to the GibTalk
+      symbols server (<code>api-gibtalk.apps.bancuh.net</code>, also reachable
+      as <code>api.gibtalk.ragib.my</code>) and downloads the matching pictures.
+      Searches aren't linked to you, and there's no account to link them to.
+    </li>
+    <li>
+      <strong>Templates</strong> are downloaded from GibTalk's public GitHub
+      repository when you open the Templates screen. Their pictures come from
+      the same symbols server.
+    </li>
+    <li>
+      <strong>Speaking words</strong> uses your device's built-in
+      text-to-speech.
+    </li>
+  </ul>
+  <p>
+    As with any website, those servers can see your IP address when your device
+    downloads from them.
+  </p>
+
+  <h2>This website</h2>
+  <p>
+    gibtalk.ragib.dev has no analytics and no cookies. The symbol search on this
+    site sends your search words to the same symbols server.
+  </p>
+
+  <h2>Changes</h2>
+  <p>
+    If this policy changes, the new version will be posted here, with a new date
+    at the top.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions? <a href={SITE.issues}>Open an issue on GitHub</a>.
+  </p>
+</Base>

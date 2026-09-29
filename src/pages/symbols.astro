@@ -1,0 +1,215 @@
+---
+import Base from "../layouts/Base.astro";
+import { LIBRARIES, SITE } from "../lib/site";
+
+const example = `${SITE.api}/api/symbols/search/?q=apple`;
+---
+
+<Base
+  title="Symbols"
+  description="Search about 16,700 free AAC symbols from ARASAAC, Mulberry and Tawasol, and use the GibTalk symbols API in your own projects."
+>
+  <h1>Symbols</h1>
+  <p class="lead">
+    GibTalk's pictures come from three open symbol libraries, about 16,700
+    symbols in all. Search them here, the same way the app does.
+  </p>
+
+  <form class="search card" id="search-form" role="search">
+    <label for="q">Search symbols</label>
+    <div class="row">
+      <input
+        id="q"
+        name="q"
+        type="search"
+        placeholder="apple, drink, happy…"
+        autocomplete="off"
+        required
+      />
+      <button class="button" type="submit">
+        Search
+      </button>
+    </div>
+    <p id="status" class="muted" aria-live="polite"></p>
+  </form>
+  <ul id="results" class="results" aria-label="Search results"></ul>
+
+  <h2 id="api">Use the symbols API</h2>
+  <p>
+    The same search is available to anyone building AAC tools, free, with no key
+    and no sign-up. It's a small server I pay for myself, so please be kind to
+    it, and cache what you use.
+  </p>
+
+  <h3>Search</h3>
+  <pre><code>GET {SITE.api}/api/symbols/search/?q=&lt;words&gt;</code></pre>
+  <p>
+    Returns up to 100 symbols whose names best match the search, most similar
+    first:
+  </p>
+  <pre><code>curl "{example}"</code></pre>
+  <pre><code>{`[
+  { "url": "${SITE.api}/media/arasaac-symbols/apple.png" },
+  { "url": "${SITE.api}/media/mulberry-symbols/apple.png" },
+  { "url": "${SITE.api}/media/tawasol-symbols/Apple/Apple-01.png" }
+]`}</code></pre>
+
+  <h3>Images</h3>
+  <pre><code>GET {SITE.api}/media/&lt;library&gt;/&lt;file&gt;.png</code></pre>
+  <p>
+    Each result's <code>url</code> is the image itself. The part after
+    <code>/media/</code> tells you which library it's from, which decides the
+    licence it comes with (below). Browsers can call the API directly, as this
+    page does.
+  </p>
+  <p>
+    The server's code is on <a href={SITE.apiRepo}>GitHub</a>.
+  </p>
+
+  <h2 id="credits">Licences and credits</h2>
+  <p>
+    The symbols aren't mine. They belong to the people who made them, and each
+    library has its own licence. If you use them, including through the API,
+    follow the terms of the library each symbol comes from.
+  </p>
+
+  {LIBRARIES.map((lib) => (
+    <section class="card library">
+      <h3>
+        <a href={lib.url}>{lib.name}</a>
+      </h3>
+      <p class="muted">
+        {lib.count} symbols · <code>/media/{lib.path}/</code> ·
+        <a href={lib.licenseUrl}>{lib.license}</a>
+      </p>
+      <p>{lib.terms}</p>
+      <p class="credit">{lib.credit}</p>
+    </section>
+  ))}
+</Base>
+
+<script>
+  const API = "https://api.gibtalk.ragib.my";
+  const form = document.getElementById("search-form") as HTMLFormElement;
+  const input = document.getElementById("q") as HTMLInputElement;
+  const status = document.getElementById("status") as HTMLParagraphElement;
+  const results = document.getElementById("results") as HTMLUListElement;
+
+  function libraryOf(url: string): string {
+    const m = url.match(/\/media\/([a-z]+)-symbols\//);
+    return m ? m[1].charAt(0).toUpperCase() + m[1].slice(1) : "";
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const q = input.value.trim();
+    if (!q) return;
+    status.textContent = "Searching…";
+    results.replaceChildren();
+    try {
+      const res = await fetch(
+        `${API}/api/symbols/search/?q=${encodeURIComponent(q)}`,
+      );
+      if (!res.ok) throw new Error(String(res.status));
+      const symbols = (await res.json()) as { url: string }[];
+      status.textContent = symbols.length
+        ? `${symbols.length} symbols for "${q}".`
+        : `No symbols found for "${q}". Try a simpler word.`;
+      results.replaceChildren(
+        ...symbols.map((s) => {
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+          a.href = s.url;
+          const img = document.createElement("img");
+          img.src = s.url;
+          img.alt =
+            s.url
+              .split("/")
+              .pop()
+              ?.replace(/[-_]/g, " ")
+              .replace(/\.png$/, "") ?? "";
+          img.loading = "lazy";
+          img.width = 96;
+          img.height = 96;
+          const label = document.createElement("span");
+          label.textContent = libraryOf(s.url);
+          a.append(img, label);
+          li.append(a);
+          return li;
+        }),
+      );
+    } catch {
+      status.textContent = "The search didn't work. Please try again.";
+    }
+  });
+</script>
+
+<style>
+  .lead {
+    font-size: 1.2rem;
+    margin-top: 0.75rem;
+  }
+  .search {
+    margin-top: 1.5rem;
+  }
+  .search label {
+    font-weight: 700;
+  }
+  .row {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+  }
+  input {
+    flex: 1;
+    min-width: 0;
+    font: inherit;
+    padding: 0.6rem 0.8rem;
+    border: 3px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg);
+    color: var(--text);
+  }
+  .results {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .results :global(a) {
+    display: block;
+    padding: 0.4rem;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: #ffffff;
+    text-align: center;
+    color: #141414;
+    text-decoration: none;
+    font-size: 0.75rem;
+  }
+  .results :global(img) {
+    display: block;
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+  }
+  pre {
+    overflow-x: auto;
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1px solid var(--soft-border);
+    font-size: 0.9rem;
+  }
+  .library {
+    margin-top: 1rem;
+  }
+  .library h3 {
+    margin-top: 0.25rem;
+  }
+  .credit {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+</style>

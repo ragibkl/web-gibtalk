@@ -1,0 +1,199 @@
+---
+import { Image } from "astro:assets";
+
+import Base from "../layouts/Base.astro";
+import { SITE } from "../lib/site";
+
+import tablet from "../assets/tablet-01-main-screen.png";
+import editor from "../assets/tablet-03-main-screen-editor.png";
+import search from "../assets/tablet-06-search-symbol.png";
+import phone from "../assets/phone-01-main-screen.png";
+import addWord from "../assets/phone-04-add-word.png";
+---
+
+<Base>
+  <section class="hero">
+    <div>
+      <h1>GibTalk</h1>
+      <p class="tagline">{SITE.tagline}</p>
+      <p>
+        Tap a picture, and GibTalk says the word out loud. For children and
+        adults who can't yet speak, or can't speak reliably, it's a voice, and a
+        way to be understood. Free, with no ads, on Android, iPhone and iPad.
+      </p>
+      <p class="actions">
+        <a class="button" href={SITE.playStore}>
+          Get it on Google Play
+        </a>
+        <a class="button green" href={SITE.appStore}>
+          Download on the App Store
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <Image
+    src={tablet}
+    alt="GibTalk on a tablet: a grid of picture tiles such as Greetings, Food, Exercise, Yes, No, Stop and Good Job"
+    widths={[640, 1100]}
+    sizes="(max-width: 58rem) 100vw, 58rem"
+    class="shot wide"
+    loading="eager"
+  />
+
+  <h2>What is AAC?</h2>
+  <p>
+    AAC stands for <em>augmentative and alternative communication</em>. An AAC
+    app is a grid of pictures on a tablet or phone. Tap <em>drink</em>, and it
+    says "drink". Tap <em>I want</em>, then <em>play</em>, and it says "I want
+    play". Speech therapists and teachers often recommend one for children who
+    are autistic, or who have other conditions that affect speech.
+  </p>
+
+  <h2>What GibTalk does</h2>
+  <ul class="features">
+    <li>
+      <strong>Pictures that speak.</strong> Every word is a picture tile, spoken
+      aloud with your device's own voice.
+    </li>
+    <li>
+      <strong>Any language, per word.</strong> Mix Malay and English, or any
+      languages your device can speak, on the same screen. Each word is spoken
+      in its own language.
+    </li>
+    <li>
+      <strong>Your own words.</strong> Add and edit words, organise them into
+      folders, and copy and paste between folders.
+    </li>
+    <li>
+      <strong>Your own pictures.</strong> Search thousands of free symbols, or
+      take a photo of the real thing: your child's own cup, bag or car.
+    </li>
+    <li>
+      <strong>Ready-made word sets.</strong> Start from
+      <a href="/templates/">templates</a> for greetings, mealtime, play, the
+      playground and more, in English and Malay.
+    </li>
+    <li>
+      <strong>A keyboard that talks,</strong> for typing a sentence and hearing
+      it spoken.
+    </li>
+    <li>
+      <strong>Backup and restore,</strong> to keep your words safe or move them
+      to a new device.
+    </li>
+  </ul>
+
+  <div class="shots">
+    <Image
+      src={editor}
+      alt="Editing mode, with Backup, Restore, Templates and Add buttons"
+      widths={[480, 800]}
+      sizes="(max-width: 40rem) 90vw, 26rem"
+      class="shot"
+    />
+    <Image
+      src={search}
+      alt="Searching for symbols to use as a word's picture"
+      widths={[480, 800]}
+      sizes="(max-width: 40rem) 90vw, 26rem"
+      class="shot"
+    />
+    <Image
+      src={phone}
+      alt="GibTalk on a phone"
+      widths={[240, 480]}
+      sizes="12rem"
+      class="shot narrow"
+    />
+    <Image
+      src={addWord}
+      alt="Adding a word on a phone"
+      widths={[240, 480]}
+      sizes="12rem"
+      class="shot narrow"
+    />
+  </div>
+
+  <h2>Private by design</h2>
+  <p>
+    GibTalk works offline. There's no account, no login, no analytics and no
+    data collected. Your words and pictures stay on your device. Read the
+    <a href="/privacy/">privacy policy</a>.
+  </p>
+
+  <h2>Free, and staying free</h2>
+  <p>
+    Most good AAC apps cost a lot, and many families wait for a sale before they
+    can buy one. GibTalk is free, with no ads and no paid features. Its only
+    running cost is a small server for searching symbols. The code is
+    <a href={SITE.github}>open source</a>.
+  </p>
+
+  <h2>Made by a parent</h2>
+  <p>
+    I built GibTalk for my own kids, and shaped it with their teachers and
+    speech therapist. <a href={SITE.story}>Read how it started</a>.
+  </p>
+
+  <h2>Help</h2>
+  <h3>A word is spoken in the wrong language</h3>
+  <p>
+    Edit the word and choose its language. If it still sounds wrong, your device
+    may need that language's text-to-speech voice installed, usually in your
+    device's settings under text-to-speech or accessibility.
+  </p>
+  <h3>Moving to a new device</h3>
+  <p>
+    In edit mode, tap <strong>Backup</strong> to save your words to a file, then
+    <strong>Restore</strong> it on the new device. Restore replaces the words
+    already on that device.
+  </p>
+  <p>
+    Something else? <a href={SITE.issues}>Open an issue on GitHub</a>.
+  </p>
+</Base>
+
+<style>
+  .hero {
+    padding-top: 2rem;
+  }
+  .tagline {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin: 0.5rem 0 1rem;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  .features {
+    padding-left: 1.2rem;
+  }
+  .features li + li {
+    margin-top: 0.6rem;
+  }
+  :global(.shot) {
+    border: 3px solid var(--border);
+    border-radius: 16px;
+  }
+  :global(.shot.wide) {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+  .shots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-top: 1.5rem;
+  }
+  .shots :global(.shot) {
+    width: min(26rem, 100%);
+  }
+  .shots :global(.shot.narrow) {
+    width: 12rem;
+  }
+</style>

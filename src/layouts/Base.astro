@@ -1,0 +1,69 @@
+---
+import "@fontsource/atkinson-hyperlegible/400.css";
+import "@fontsource/atkinson-hyperlegible/700.css";
+import "../styles/global.css";
+import { SITE } from "../lib/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = SITE.description } = Astro.props;
+const fullTitle = title ? `${title} · GibTalk` : "GibTalk: a free AAC app";
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const path = Astro.url.pathname;
+
+const nav = [
+  { href: "/templates/", label: "Templates" },
+  { href: "/symbols/", label: "Symbols" },
+  { href: "/privacy/", label: "Privacy" },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="color-scheme" content="light dark" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="site-name" href="/">
+        GibTalk
+      </a>
+      <nav aria-label="Main">
+        {nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={path.startsWith(item.href) ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <a href={SITE.playStore}>Google Play</a>
+      <a href={SITE.appStore}>App Store</a>
+      <a href={SITE.github}>Source</a>
+      <a href="/symbols/#credits">Symbol credits</a>
+      <a href="/privacy/">Privacy</a>
+      <a href={SITE.story}>Why I built it</a>
+    </footer>
+  </body>
+</html>
