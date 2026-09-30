@@ -1,7 +1,7 @@
 # web-gibtalk
 
 The website for [GibTalk](https://github.com/ragibkl/GibTalk), a free AAC app, at
-[gibtalk.ragib.dev](https://gibtalk.ragib.dev).
+[gibtalk.com](https://gibtalk.com).
 
 Built with [Astro](https://astro.build) as a static site, served by nginx.
 

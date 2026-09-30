@@ -4,7 +4,7 @@ import preact from "@astrojs/preact";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: "https://gibtalk.ragib.dev",
+  site: "https://gibtalk.com",
   integrations: [preact(), sitemap()],
   // Compression drops the space between a line of text and a link that starts
   // the next line. The pages are small, and nginx gzips them anyway.
