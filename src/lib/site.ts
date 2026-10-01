@@ -8,6 +8,7 @@ export const SITE = {
   appStore: "https://apps.apple.com/us/app/gibtalk/id6504814985",
   github: "https://github.com/ragibkl/GibTalk",
   issues: "https://github.com/ragibkl/GibTalk/issues",
+  supportEmail: "ragib.badaruddin@gmail.com",
   api: "https://api.gibtalk.ragib.my",
   apiRepo: "https://github.com/ragibkl/api-gibtalk",
   story: "https://ragib.dev/writing/building-an-aac-app-for-my-kids/",

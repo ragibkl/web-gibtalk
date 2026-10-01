@@ -1,0 +1,93 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE } from "../lib/site";
+---
+
+<Base
+  title="Support"
+  description="Get help with GibTalk: contact, backups, templates and speech."
+>
+  <h1>Support</h1>
+
+  <h2>Contact</h2>
+  <p>
+    Email <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>. Tell
+    me which phone or tablet you use and what happened, and I'll get back to
+    you.
+  </p>
+  <p>
+    If you have a GitHub account, you can also
+    <a href={SITE.issues}>open an issue on GitHub</a>.
+  </p>
+
+  <h2>Common questions</h2>
+
+  <h3>How do I add or change words?</h3>
+  <p>
+    Tap <strong>Edit</strong> and type the four numbers shown. This keeps
+    children from changing words by accident. In edit mode you can add words,
+    tap a word to change it, and move words around. Tap <strong>Done</strong>
+    when you're finished.
+  </p>
+
+  <h3>How do I back up my words?</h3>
+  <p>
+    In edit mode, tap <strong>Backup</strong>. GibTalk makes a file with all
+    your words and pictures and opens the share menu, so you can save it to
+    your files or send it to yourself.
+  </p>
+
+  <h3>How do I move my words to a new device?</h3>
+  <p>
+    Make a backup on the old device and get the file onto the new one. Then, in
+    edit mode, tap <strong>Restore</strong> and pick the file.
+    <strong>Restore replaces all the words on the device</strong>, so back up
+    first if there's anything there you want to keep.
+  </p>
+
+  <h3>What are templates?</h3>
+  <p>
+    Ready-made sets of words. In edit mode, tap <strong>Templates</strong> and
+    pick one. Templates are added to your words; they don't replace them.
+    <a href="/templates/">See the templates</a>.
+  </p>
+  <p>
+    You can also make your own word set on a computer with the
+    <a href="/builder/">template builder</a>, then open it in GibTalk with
+    <strong>Restore</strong>.
+  </p>
+
+  <h3>A word doesn't speak, or speaks in the wrong voice</h3>
+  <p>
+    GibTalk uses your device's text-to-speech. If a language doesn't speak,
+    its voice may not be installed:
+  </p>
+  <ul>
+    <li>
+      <strong>Android:</strong> Settings → search for "Text-to-speech output" →
+      open the settings of the preferred engine → install voice data for the
+      language.
+    </li>
+    <li>
+      <strong>iPhone and iPad:</strong> Settings → Accessibility → Spoken
+      Content → Voices, and download a voice for the language.
+    </li>
+  </ul>
+  <p>
+    Also check that the word's language is set correctly: in edit mode, tap
+    the word and look at its language.
+  </p>
+
+  <h3>Where do the pictures come from?</h3>
+  <p>
+    Symbol search uses free symbol libraries (ARASAAC, Mulberry and Tawasol).
+    You can also take a photo or pick one from your device.
+    <a href="/symbols/#credits">Symbol credits</a>.
+  </p>
+
+  <h3>Does GibTalk collect my data?</h3>
+  <p>
+    No. There's no account, no ads and no analytics, and your words stay on
+    your device. See the <a href="/privacy/">privacy policy</a>.
+  </p>
+</Base>
