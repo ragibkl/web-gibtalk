@@ -5,15 +5,11 @@ import { SITE } from "../lib/site";
 import { getTemplates } from "../lib/templates";
 import "../styles/builder.css";
 
-// Browsers fetch templates from raw.githubusercontent.com, which allows it;
-// the github.com/raw links the app uses redirect without CORS headers.
+// The browser opens a template from the symbols API (CORS allowed).
 const templates = (await getTemplates()).map((t) => ({
   name: t.name,
   description: t.description,
-  url: t.file.replace(
-    "https://github.com/ragibkl/GibTalk/raw/",
-    "https://raw.githubusercontent.com/ragibkl/GibTalk/",
-  ),
+  url: t.url,
 }));
 ---
 

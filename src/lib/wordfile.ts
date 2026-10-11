@@ -66,6 +66,13 @@ export function parseWords(text: string): BuilderWord[] {
   return fromFile(YAML.parse(text), "en");
 }
 
+/** A template from the symbols API: JSON with its words under `words`. */
+export function parseTemplate(json: unknown): BuilderWord[] {
+  const words =
+    json && typeof json === "object" && "words" in json ? json.words : [];
+  return fromFile(words, "en");
+}
+
 function toFile(words: BuilderWord[]): FileWord[] {
   return words.map((w) => ({
     label: w.label.trim(),

@@ -1,7 +1,5 @@
-// Ready-made word sets, read at build time from the same place the app reads
-// them: templates/ in the GibTalk repo. Rebuild the site to pick up new ones.
-import YAML from "yaml";
-
+// Ready-made word sets, read at build time from the GibTalk symbols API (the
+// same templates the app offers). Rebuild the site to pick up new ones.
 import { SITE } from "./site";
 
 export type Word = {
@@ -11,47 +9,36 @@ export type Word = {
   children?: Word[];
 };
 
-export type Template = {
+type TemplateSummary = {
+  id: string;
   name: string;
   description: string;
   author: string;
-  file: string;
+  language: string;
+  words: number;
+  url: string;
+};
+
+export type Template = Omit<TemplateSummary, "words"> & {
+  wordCount: number;
   words: Word[];
 };
 
-type IndexItem = {
-  name: string;
-  description: string;
-  author: string;
-  uri: string;
-};
-
-async function get(url: string): Promise<string> {
+async function getJson<T>(url: string): Promise<T> {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`${res.status} fetching ${url}`);
-  return res.text();
+  return (await res.json()) as T;
 }
 
 let cache: Promise<Template[]> | undefined;
 
 export function getTemplates(): Promise<Template[]> {
   cache ??= (async () => {
-    const index = YAML.parse(
-      await get(`${SITE.templatesBase}/index.yaml`),
-    ) as IndexItem[];
+    const list = await getJson<TemplateSummary[]>(`${SITE.api}/api/templates`);
     return Promise.all(
-      index.map(async (item) => {
-        const url = item.uri.startsWith("./")
-          ? `${SITE.templatesBase}/${item.uri.slice(2)}`
-          : item.uri;
-        const words = YAML.parse(await get(url)) as Word[];
-        return {
-          name: item.name,
-          description: item.description,
-          author: item.author,
-          file: url,
-          words,
-        };
+      list.map(async (summary) => {
+        const { words } = await getJson<{ words: Word[] }>(summary.url);
+        return { ...summary, wordCount: summary.words, words };
       }),
     );
   })();
