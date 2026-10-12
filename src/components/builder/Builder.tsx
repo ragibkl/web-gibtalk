@@ -10,6 +10,7 @@ import {
   countWords,
   incomplete,
   newId,
+  parseTemplate,
   parseWords,
   stringifyWords,
 } from "../../lib/wordfile";
@@ -209,7 +210,7 @@ export default function Builder({ templates }: Props) {
     try {
       const res = await fetch(template.url);
       if (!res.ok) throw new Error(String(res.status));
-      const opened = parseWords(await res.text());
+      const opened = parseTemplate(await res.json());
       replaceAll(
         opened,
         template.name,

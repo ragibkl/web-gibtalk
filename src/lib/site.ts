@@ -9,10 +9,9 @@ export const SITE = {
   github: "https://github.com/ragibkl/GibTalk",
   issues: "https://github.com/ragibkl/GibTalk/issues",
   supportEmail: "support@gibtalk.com",
-  api: "https://api.gibtalk.ragib.my",
+  api: "https://api.gibtalk.com",
   apiRepo: "https://github.com/ragibkl/api-gibtalk",
   story: "https://ragib.dev/writing/building-an-aac-app-for-my-kids/",
-  templatesBase: "https://github.com/ragibkl/GibTalk/raw/master/templates",
 };
 
 /** Symbol libraries served by the symbols API, and the terms each comes with. */

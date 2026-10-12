@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 
-const API = "https://api.gibtalk.ragib.my";
+const API = "https://api.gibtalk.com";
 
 type Props = { initial: string; onPick(uri: string): void };
 
