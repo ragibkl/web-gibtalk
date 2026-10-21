@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import { SITE } from "../lib/site";
 
+import empty from "../assets/manual/empty.png";
 import main from "../assets/manual/main.png";
 import sentence from "../assets/manual/sentence.png";
 import parentCheck from "../assets/manual/parent-check.png";
@@ -51,9 +52,24 @@ const shot = {
   </nav>
 
   <h2 id="talking">1. Talking with GibTalk</h2>
+  <h3>The first time</h3>
   <p>
-    GibTalk opens on the <strong>Home</strong> board, a grid of picture tiles.
-    A new install comes with a starter set of words to try.
+    A new install starts with no words. To get going, either add your own
+    words in <a href="#edit-mode">edit mode</a>, add a ready-made
+    <a href="#templates">template</a>, or restore a
+    <a href="#backup">backup</a> from another device.
+  </p>
+  <Image
+    src={empty}
+    alt="GibTalk on first launch: an empty board with a message explaining how to add words, restore a backup or add a template"
+    {...shot}
+  />
+
+  <h3>The Home board</h3>
+  <p>
+    Once it has words, GibTalk opens on the <strong>Home</strong> board, a
+    grid of picture tiles. This one was set up for a child at home and at
+    school:
   </p>
   <Image
     src={main}
