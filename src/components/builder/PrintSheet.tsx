@@ -11,13 +11,12 @@ type Props = {
   onDone(): void;
 };
 
-// Smaller cells get smaller labels.
-const LABEL_SIZE: Record<number, string> = {
-  3: "20pt",
-  4: "16pt",
-  5: "13pt",
-  6: "11pt",
-};
+// Smaller cells get smaller labels: sized by the tighter of rows and columns
+// (A4 landscape is about 1.4 times wider than tall).
+function labelSize({ rows, cols }: GridSize): string {
+  const cells = Math.max(rows, cols / 1.4);
+  return `${Math.max(8, Math.min(22, Math.round(64 / cells)))}pt`;
+}
 
 /** Wait until every picture has loaded (or failed), at most a few seconds. */
 async function picturesReady(root: HTMLElement) {
@@ -58,7 +57,7 @@ export default function PrintSheet({ pages, grid, onDone }: Props) {
   const style = {
     "--b-rows": String(grid.rows),
     "--b-cols": String(grid.cols),
-    "--b-label": LABEL_SIZE[grid.rows] ?? "12pt",
+    "--b-label": labelSize(grid),
   };
 
   return createPortal(

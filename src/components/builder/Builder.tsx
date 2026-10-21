@@ -15,7 +15,8 @@ import {
   stringifyWords,
 } from "../../lib/wordfile";
 import {
-  GRID_SIZES,
+  COLUMN_CHOICES,
+  ROW_CHOICES,
   type PrintPage,
   boardPages,
   bookPages,
@@ -98,7 +99,8 @@ export default function Builder({ templates }: Props) {
   const [lastLanguage, setLastLanguage] = useState<Language>("en");
   const [message, setMessage] = useState("");
   const [loaded, setLoaded] = useState(false);
-  const [gridIndex, setGridIndex] = useState(1);
+  const [rows, setRows] = useState(4);
+  const [cols, setCols] = useState(5);
   const [printing, setPrinting] = useState<PrintPage[] | null>(null);
   const editorRef = useRef<HTMLDivElement>(null);
 
@@ -261,7 +263,7 @@ export default function Builder({ templates }: Props) {
     setMessage(`Downloaded ${a.download}.`);
   };
 
-  const grid = GRID_SIZES[gridIndex].size;
+  const grid = { rows, cols };
   const setTitle = name.trim() || "GibTalk";
 
   // The folder on screen, as one board.
@@ -343,15 +345,28 @@ export default function Builder({ templates }: Props) {
         </div>
         <div class="b-actions b-print-actions">
           <span>Print or save as PDF:</span>
-          <select
-            aria-label="Grid size"
-            value={String(gridIndex)}
-            onChange={(e) => setGridIndex(Number(e.currentTarget.value))}
-          >
-            {GRID_SIZES.map((g, i) => (
-              <option value={String(i)}>{g.label}</option>
-            ))}
-          </select>
+          <label class="b-grid-size">
+            <select
+              aria-label="Rows"
+              value={String(rows)}
+              onChange={(e) => setRows(Number(e.currentTarget.value))}
+            >
+              {ROW_CHOICES.map((n) => (
+                <option value={String(n)}>{n}</option>
+              ))}
+            </select>
+            rows ×
+            <select
+              aria-label="Columns"
+              value={String(cols)}
+              onChange={(e) => setCols(Number(e.currentTarget.value))}
+            >
+              {COLUMN_CHOICES.map((n) => (
+                <option value={String(n)}>{n}</option>
+              ))}
+            </select>
+            columns ({rows * cols} pictures a page)
+          </label>
           <button class="button plain" type="button" onClick={printBoard}>
             Print this folder
           </button>
