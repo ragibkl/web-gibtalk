@@ -344,7 +344,7 @@ export default function Builder({ templates }: Props) {
           </button>
         </div>
         <div class="b-actions b-print-actions">
-          <span>Print or save as PDF:</span>
+          <span>Print:</span>
           <label class="b-grid-size">
             <select
               aria-label="Rows"
@@ -365,7 +365,7 @@ export default function Builder({ templates }: Props) {
                 <option value={String(n)}>{n}</option>
               ))}
             </select>
-            columns ({rows * cols} pictures a page)
+            columns ({rows * cols} a page)
           </label>
           <button class="button plain" type="button" onClick={printBoard}>
             Print this folder
