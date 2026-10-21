@@ -4,12 +4,9 @@ import type { BuilderWord } from "./wordfile";
 
 export type GridSize = { rows: number; cols: number };
 
-export const GRID_SIZES: { label: string; size: GridSize }[] = [
-  { label: "3 × 4 (large)", size: { rows: 3, cols: 4 } },
-  { label: "4 × 5", size: { rows: 4, cols: 5 } },
-  { label: "5 × 6", size: { rows: 5, cols: 6 } },
-  { label: "6 × 8 (core board)", size: { rows: 6, cols: 8 } },
-];
+// Teachers pick rows and columns; core boards are often 6 × 7 or 6 × 9.
+export const ROW_CHOICES = [1, 2, 3, 4, 5, 6, 7, 8];
+export const COLUMN_CHOICES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 export type PrintCell = {
   word: BuilderWord;

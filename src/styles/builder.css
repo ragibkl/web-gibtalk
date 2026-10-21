@@ -347,3 +347,10 @@
     white-space: nowrap;
   }
 }
+
+.b-grid-size {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
