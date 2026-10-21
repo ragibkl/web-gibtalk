@@ -34,6 +34,11 @@ const templates = (await getTemplates()).map((t) => ({
       backup file to change it.
     </li>
     <li>Download the file when you're done.</li>
+    <li>
+      To use it without a tablet, print it: <strong>Print this folder</strong>
+      makes one board, <strong>Print all as a book</strong> puts each folder on
+      its own page. Your browser's print window can also save it as a PDF.
+    </li>
   </ol>
 
   <Builder client:only="preact" templates={templates} />
