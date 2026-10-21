@@ -14,6 +14,13 @@ import {
   parseWords,
   stringifyWords,
 } from "../../lib/wordfile";
+import {
+  GRID_SIZES,
+  type PrintPage,
+  boardPages,
+  bookPages,
+} from "../../lib/printPages";
+import PrintSheet from "./PrintSheet";
 import SymbolSearch from "./SymbolSearch";
 import { photoToDataUri } from "./photo";
 
@@ -91,6 +98,8 @@ export default function Builder({ templates }: Props) {
   const [lastLanguage, setLastLanguage] = useState<Language>("en");
   const [message, setMessage] = useState("");
   const [loaded, setLoaded] = useState(false);
+  const [gridIndex, setGridIndex] = useState(1);
+  const [printing, setPrinting] = useState<PrintPage[] | null>(null);
   const editorRef = useRef<HTMLDivElement>(null);
 
   // Restore the draft this browser was working on.
@@ -252,6 +261,29 @@ export default function Builder({ templates }: Props) {
     setMessage(`Downloaded ${a.download}.`);
   };
 
+  const grid = GRID_SIZES[gridIndex].size;
+  const setTitle = name.trim() || "GibTalk";
+
+  // The folder on screen, as one board.
+  const printBoard = () => {
+    if (!list.length) {
+      setMessage("This folder has no words to print yet.");
+      return;
+    }
+    const folder = folders[folders.length - 1];
+    const title = folder ? folder.label || "Untitled folder" : setTitle;
+    setPrinting(boardPages(title, list, grid));
+  };
+
+  // Every folder on its own page, linked by page numbers.
+  const printBook = () => {
+    if (!words.length) {
+      setMessage("Add some words first.");
+      return;
+    }
+    setPrinting(bookPages(setTitle, words, grid));
+  };
+
   const speak = (word: BuilderWord) => {
     if (!("speechSynthesis" in window) || !word.label.trim()) return;
     const u = new SpeechSynthesisUtterance(word.label);
@@ -307,6 +339,24 @@ export default function Builder({ templates }: Props) {
           </select>
           <button class="button plain" type="button" onClick={startOver}>
             Start over
+          </button>
+        </div>
+        <div class="b-actions b-print-actions">
+          <span>Print or save as PDF:</span>
+          <select
+            aria-label="Grid size"
+            value={String(gridIndex)}
+            onChange={(e) => setGridIndex(Number(e.currentTarget.value))}
+          >
+            {GRID_SIZES.map((g, i) => (
+              <option value={String(i)}>{g.label}</option>
+            ))}
+          </select>
+          <button class="button plain" type="button" onClick={printBoard}>
+            Print this folder
+          </button>
+          <button class="button plain" type="button" onClick={printBook}>
+            Print all as a book
           </button>
         </div>
         <p class="muted b-message" aria-live="polite">
@@ -498,6 +548,14 @@ export default function Builder({ templates }: Props) {
             </button>
           </div>
         </div>
+      )}
+
+      {printing && (
+        <PrintSheet
+          pages={printing}
+          grid={grid}
+          onDone={() => setPrinting(null)}
+        />
       )}
     </div>
   );
