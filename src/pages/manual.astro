@@ -1,0 +1,409 @@
+---
+import { Image } from "astro:assets";
+
+import Base from "../layouts/Base.astro";
+import { SITE } from "../lib/site";
+
+import main from "../assets/manual/main.png";
+import sentence from "../assets/manual/sentence.png";
+import parentCheck from "../assets/manual/parent-check.png";
+import editMode from "../assets/manual/edit-mode.png";
+import moreMenu from "../assets/manual/more-menu.png";
+import wordEditor from "../assets/manual/word-editor.png";
+import templates from "../assets/manual/templates.png";
+import importConfirm from "../assets/manual/import-confirm.png";
+import voicePrompt from "../assets/manual/voice-prompt.png";
+import voiceList from "../assets/manual/voice-list.png";
+import tamilFolder from "../assets/manual/tamil-folder.png";
+import languageList from "../assets/manual/language-list.png";
+import keyboard from "../assets/manual/keyboard.png";
+import builder from "../assets/manual/builder.png";
+
+const shot = {
+  widths: [640, 1100],
+  sizes: "(max-width: 58rem) 100vw, 58rem",
+  class: "shot",
+};
+---
+
+<Base
+  title="User manual"
+  description="How to use GibTalk: building sentences, adding your own words and pictures, languages and voices, templates, backups, and printing boards."
+>
+  <h1>User manual</h1>
+  <p class="lead">
+    Everything GibTalk does, step by step. The screenshots are from an Android
+    tablet; phones, iPhones and iPads work the same way.
+  </p>
+
+  <nav class="toc card" aria-label="Contents">
+    <ol>
+      <li><a href="#talking">Talking with GibTalk</a></li>
+      <li><a href="#edit-mode">Edit mode</a></li>
+      <li><a href="#words">Adding and changing words</a></li>
+      <li><a href="#languages">Languages and voices</a></li>
+      <li><a href="#keyboard">Typing with the keyboard</a></li>
+      <li><a href="#templates">Templates</a></li>
+      <li><a href="#backup">Backup, restore and new devices</a></li>
+      <li><a href="#builder">Building and printing on a computer</a></li>
+      <li><a href="#tips">Tips for starting out</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="talking">1. Talking with GibTalk</h2>
+  <p>
+    GibTalk opens on the <strong>Home</strong> board, a grid of picture tiles.
+    A new install comes with a starter set of words to try.
+  </p>
+  <Image
+    src={main}
+    alt="The Home board: yellow folder tiles such as Greetings, Food and Toys, green word tiles such as Yes, No, Stop and Help, and buttons around the edge"
+    {...shot}
+  />
+  <ul>
+    <li>
+      <strong>Green tiles are words.</strong> Tap one and GibTalk says it.
+    </li>
+    <li>
+      <strong>Yellow tiles are folders.</strong> Tap one to open it and see the
+      words inside, for example <em>Food</em>.
+    </li>
+    <li>
+      <strong>Back</strong> goes up one folder, <strong>Home</strong> goes
+      straight back to the Home board. The line under the buttons (Home / Food)
+      shows where you are; tap a name in it to jump there.
+    </li>
+  </ul>
+
+  <h3>Making a sentence</h3>
+  <p>
+    Each tile you tap is added to the bar at the top, so a child can build a
+    sentence one picture at a time.
+  </p>
+  <Image
+    src={sentence}
+    alt="Inside the Food folder, the top bar holds three tapped words: Makan, Nasi Goreng, Lagi"
+    {...shot}
+  />
+  <ul>
+    <li><strong>Play</strong> says the whole sentence.</li>
+    <li>Tap a word in the bar to hear just that word.</li>
+    <li>
+      The <strong>⌫</strong> button removes the last word. Press and hold it to
+      remove them all.
+    </li>
+    <li><strong>Clear All</strong> also empties the bar.</li>
+  </ul>
+
+  <h2 id="edit-mode">2. Edit mode</h2>
+  <p>
+    Changes happen in edit mode, behind a simple check so children don't
+    change words by accident. Tap <strong>Edit</strong>, type the four numbers
+    shown, and tap <strong>Ok</strong>. (On a tablet, close the on-screen
+    keyboard first if it covers the Ok button.)
+  </p>
+  <Image
+    src={parentCheck}
+    alt="A box over the board says 'Please input 3075 to continue', with a text field and an Ok button"
+    {...shot}
+  />
+  <p>In edit mode, each tile gets three small buttons:</p>
+  <Image
+    src={editMode}
+    alt="The Home board in edit mode: each tile has a pencil and a copy button at the top left and an X at the top right; Add, More and Done buttons are on the right"
+    {...shot}
+  />
+  <ul>
+    <li><strong>Pencil:</strong> change the word (see below).</li>
+    <li>
+      <strong>Copy:</strong> puts the word in the <em>Clipboard</em> bar at the
+      top. Open another folder and tap <strong>Paste</strong> to add a copy
+      there. Copy several words and paste them together.
+    </li>
+    <li>
+      <strong>X:</strong> deletes the word, or the folder and everything in
+      it. <strong>There is no undo</strong>, so make a
+      <a href="#backup">backup</a> before big changes.
+    </li>
+    <li>
+      <strong>Press and hold</strong> a tile, then drag it, to move it to a new
+      place.
+    </li>
+  </ul>
+  <p>
+    On the right: <strong>Add</strong> makes a new word in the folder you're
+    in, <strong>More</strong> has Templates, Backup and Restore, and
+    <strong>Done</strong> leaves edit mode.
+  </p>
+  <Image
+    src={moreMenu}
+    alt="The More menu open beside the buttons, listing Templates, Backup and Restore"
+    {...shot}
+  />
+
+  <h2 id="words">3. Adding and changing words</h2>
+  <p>
+    Tap <strong>Add</strong> for a new word, or the pencil on a tile to change
+    one. Both open the same screen:
+  </p>
+  <Image
+    src={wordEditor}
+    alt="The Edit Word screen: Label field, Language list, a Category switch, a Save button, and on the right the picture with three buttons above it"
+    {...shot}
+  />
+  <ul>
+    <li>
+      <strong>Label:</strong> the word as it should be spoken and shown.
+    </li>
+    <li>
+      <strong>Language:</strong> which voice reads it (see
+      <a href="#languages">Languages and voices</a>).
+    </li>
+    <li>
+      <strong>Category?</strong> Switch on to make this tile a folder that can
+      hold other words.
+    </li>
+    <li>
+      <strong>Picture:</strong> the three buttons pick a photo from the
+      device, take a new photo with the camera, or search the free symbol
+      library. Photos of the child's own cup, food or
+      family often work better than symbols.
+    </li>
+  </ul>
+  <p>Tap <strong>Save</strong> when you're done.</p>
+
+  <h2 id="languages">4. Languages and voices</h2>
+  <p>
+    GibTalk doesn't have its own voices. It uses the text-to-speech voices on
+    your phone or tablet, so it can speak any language your device has a voice
+    for, and each word can use a different language. A board can mix Malay,
+    English, Tamil and Chinese, and a sentence switches voice from word to
+    word.
+  </p>
+
+  <h3>Write words in the language's own script</h3>
+  <p>
+    The voice reads the letters it's given. A Tamil voice reads Tamil script,
+    so write <strong>அம்மா</strong>, not <em>Amma</em>; the same goes for
+    Chinese characters. A word typed in English letters but set to Tamil
+    won't sound right. If you can't type the script, ask someone who can, or
+    start from a <a href="#templates">template</a> that already has it.
+  </p>
+  <Image
+    src={tamilFolder}
+    alt="A folder of Tamil words in Tamil script, with three of them in the sentence bar"
+    {...shot}
+  />
+
+  <h3>Choosing a word's language</h3>
+  <p>
+    In the word screen, tap <strong>Language</strong>. The list shows the
+    languages your device has a voice for. If yours isn't there, tap
+    <strong>Add a language…</strong> to install a voice.
+  </p>
+  <Image
+    src={languageList}
+    alt="The language list: English, Indonesia, Melayu, Tamil (ticked), Chinese, and Add a language…"
+    {...shot}
+  />
+
+  <h3>Installing a voice</h3>
+  <p>
+    When words use a language with no voice on the device, GibTalk says so
+    and offers <strong>Install voice</strong>. Until a voice is installed,
+    those words are read by another voice. The <strong>Edit</strong> button
+    also shows a dot, and edit mode shows a reminder, until it's fixed.
+  </p>
+  <Image
+    src={voicePrompt}
+    alt="A message: 'Some words use Tamil, but this device has no voice for it yet', with Not now and Install voice buttons"
+    {...shot}
+  />
+  <ul>
+    <li>
+      <strong>Android:</strong> <em>Install voice</em> opens the voice list of
+      your text-to-speech engine (usually Speech Services by Google). Find the
+      language, for example <em>Tamil (India)</em>, and download it (about
+      10 MB). Then come back to GibTalk. If the list doesn't open, go to
+      Settings, search for "Text-to-speech output", open the settings of the
+      preferred engine and install the voice data there.
+    </li>
+    <li>
+      <strong>iPhone and iPad:</strong> Settings → Accessibility → Spoken
+      Content → Voices, choose the language and download a voice. Apple
+      doesn't offer a voice for every language; if yours isn't listed, the
+      device can't speak it yet.
+    </li>
+  </ul>
+  <Image
+    src={voiceList}
+    alt="Android's Add a language screen for Speech Services by Google, listing languages with download sizes, including Tamil (India)"
+    {...shot}
+  />
+
+  <h3>Example: trying Tamil</h3>
+  <ol>
+    <li>
+      In edit mode, tap <strong>More → Templates</strong> and choose
+      <strong>வாழ்த்துகள்</strong> (Basic Greetings in Tamil).
+    </li>
+    <li>
+      If GibTalk asks to install a voice, tap <strong>Install voice</strong>,
+      download Tamil, and come back.
+    </li>
+    <li>
+      Tap <strong>Done</strong>, open the new folder at the end of Home, and
+      tap a word.
+    </li>
+    <li>
+      To add your own Tamil words, tap <strong>Add</strong>, type the word in
+      Tamil script, and set <strong>Language</strong> to தமிழ் (Tamil).
+    </li>
+  </ol>
+
+  <h2 id="keyboard">5. Typing with the keyboard</h2>
+  <p>
+    For anything that isn't on the board, tap <strong>Keyboard</strong>, type,
+    and tap <strong>Play</strong>. The button beside the text picks the
+    language (here <em>ms</em> for Malay). <strong>Words</strong> goes back to
+    the pictures.
+  </p>
+  <Image
+    src={keyboard}
+    alt="The keyboard screen: a text field with 'selamat pagi cikgu', a language button showing ms, and Play and Clear All buttons"
+    {...shot}
+  />
+
+  <h2 id="templates">6. Templates</h2>
+  <p>
+    Templates are ready-made sets of words, such as greetings, mealtime or
+    playground, in English, Malay and Tamil. In edit mode, tap
+    <strong>More → Templates</strong> and pick one. You can also browse them
+    on the <a href="/templates/">Templates page</a>.
+  </p>
+  <Image
+    src={templates}
+    alt="The Import a Template screen: Import from file at the top, then a list of templates such as Greetings, Ucapan and the Tamil greetings"
+    {...shot}
+  />
+  <p>
+    A template is <strong>added</strong> to your words, as a new folder at the
+    end of Home; nothing you already have is changed.
+  </p>
+  <Image
+    src={importConfirm}
+    alt="A confirmation: 'Import template into current board? Words in this template will be combined with your current board', with Cancel and Ok"
+    {...shot}
+  />
+  <p>
+    <strong>Import from file</strong> at the top of the same screen adds the
+    words from a file: a backup, a set made in the
+    <a href="/builder/">template builder</a>, or a file someone sent you.
+  </p>
+
+  <h2 id="backup">7. Backup, restore and new devices</h2>
+  <ul>
+    <li>
+      <strong>Backup</strong> (More → Backup) makes one file with all your
+      words and pictures and opens the share menu. Save it to your files,
+      Google Drive or iCloud, or send it to yourself.
+    </li>
+    <li>
+      <strong>Restore</strong> (More → Restore) opens a backup file and
+      <strong>replaces every word</strong> on the device with the ones in the
+      file.
+    </li>
+    <li>
+      To <strong>add</strong> words from a file without losing what's there,
+      use <strong>Templates → Import from file</strong> instead.
+    </li>
+  </ul>
+  <p>
+    <strong>Moving to a new phone or tablet:</strong> make a backup on the old
+    device, send the file to the new one, install GibTalk there, and restore
+    it. Backups work between Android and iPhone/iPad.
+  </p>
+  <p>
+    GibTalk keeps everything on the device and has no account, so a backup is
+    the only copy outside the device. Make one now and then, and before big
+    changes.
+  </p>
+
+  <h2 id="builder">8. Building and printing on a computer</h2>
+  <p>
+    The <a href="/builder/">template builder</a> works in a browser on a
+    laptop or computer, with a bigger screen and a keyboard. It's handy for
+    teachers and therapists preparing words for several children.
+  </p>
+  <Image
+    src={builder}
+    alt="The template builder: a name field, buttons to download, open a file or start from a template, the print row with rows and columns, and the words grid"
+    widths={[640, 925]}
+    sizes="(max-width: 58rem) 100vw, 58rem"
+    class="shot"
+  />
+  <ul>
+    <li>
+      Add words and folders, and pick symbols or upload photos, much like in
+      the app. You can also start from a template or open a backup.
+    </li>
+    <li>
+      <strong>Download file</strong>, send it to the device, and use
+      <strong>Templates → Import from file</strong> (adds the words) or
+      <strong>Restore</strong> (replaces all words).
+    </li>
+    <li>
+      <strong>Printing:</strong> choose the rows and columns, for example 6 ×
+      9 for a core board. <strong>Print this folder</strong> prints the folder
+      on screen as one board; <strong>Print all as a book</strong> puts each
+      folder on its own page, with page numbers to follow. Pages are A4
+      landscape, and the print window can save a PDF. Printed boards are
+      useful in class, outdoors, or when the tablet is charging.
+    </li>
+  </ul>
+
+  <h2 id="tips">9. Tips for starting out</h2>
+  <ul>
+    <li>
+      Start small: a few words the child wants every day (eat, drink, toilet,
+      help, more, stop), then add more as they're used.
+    </li>
+    <li>
+      Put the most-used words on Home, and group the rest into folders by
+      place or activity.
+    </li>
+    <li>
+      Use the words yourself: tap them as you talk, so the child sees how the
+      board works.
+    </li>
+    <li>Keep the same words in the same place, so they're easy to find.</li>
+    <li>Make a backup once the board is set up.</li>
+  </ul>
+
+  <p>
+    Questions or a problem? See <a href="/support/">Support</a> or email
+    <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>.
+  </p>
+</Base>
+
+<style>
+  .lead {
+    font-size: 1.2rem;
+    margin-top: 0.75rem;
+  }
+  .toc ol {
+    margin: 0;
+    padding-left: 1.4rem;
+  }
+  :global(.shot) {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 1rem 0;
+    border: 3px solid var(--border);
+    border-radius: 16px;
+  }
+  h2 {
+    scroll-margin-top: 1rem;
+  }
+</style>
