@@ -349,8 +349,12 @@
 }
 
 .b-grid-size {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.4rem;
+}
+
+.builder .b-grid-size select {
+  width: auto;
 }
