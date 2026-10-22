@@ -53,4 +53,9 @@ export function countWords(words: Word[]): number {
 export const LANGUAGES: Record<string, string> = {
   en: "English",
   ms: "Malay",
+  id: "Indonesian",
+  zh: "Chinese",
+  ta: "Tamil",
+  te: "Telugu",
+  tu: "Telugu",
 };
