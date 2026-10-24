@@ -63,7 +63,8 @@ About 20 words.</code></pre>
       Choose the words. Keep labels short (one to three words), in the user's
       language, the way the child or family would say them. Include a few core
       words that fit the topic (for example want, more, finished, help, stop,
-      yes, no). Group them into folders of about 6 to 20 words if there are many.
+      yes, no). Group them into folders of about 6 to 20 words if there are
+      many.
     </li>
     <li>
       Find a picture for every word and folder with the symbol lookup below.
@@ -83,7 +84,9 @@ About 20 words.</code></pre>
       Search in <strong>English</strong>, even when the labels are in another
       language: label "nasi", search "rice".
     </li>
-    <li>Up to 60 words per call. Write spaces as <code>%20</code>.</li>
+    <li>
+      Up to 60 words per call. Write spaces as <code>%20</code>.
+    </li>
     <li>
       The reply lists the top 5 symbols for each word, by name:
       <pre><code>{reply}</code></pre>
@@ -93,9 +96,9 @@ About 20 words.</code></pre>
       the label. Copy its <code>url</code> exactly as given.
     </li>
     <li>
-      If no candidate fits (or the list is empty), look up a simpler word or
-      a synonym: "finished" → "finish", "all done", "done"; "toilet" →
-      "bathroom". Try two or three words before giving up.
+      If no candidate fits (or the list is empty), look up a simpler word or a
+      synonym: "finished" → "finish", "all done", "done"; "toilet" → "bathroom".
+      Try two or three words before giving up.
     </li>
     <li>
       If nothing fits, use <code>uri: ""</code>. The user can choose a picture
@@ -105,10 +108,9 @@ About 20 words.</code></pre>
 
   <h2 id="format">The file format</h2>
   <p>
-    A YAML list of words. Each word has <code>label</code>,
-    <code>language</code> and <code>uri</code> (its picture). A folder is a
-    word with <code>children</code>: a list of more words. Folders can hold
-    folders.
+    A YAML list of words. Each word has <code>label</code>,<code>language</code>{" "}
+    and <code>uri</code> (its picture). A folder is a word with{" "}
+    <code>children</code>: a list of more words. Folders can hold folders.
   </p>
   <pre><code>{example}</code></pre>
   <ul>
@@ -120,29 +122,30 @@ About 20 words.</code></pre>
       <code>language</code> is the voice that speaks the label:
       <code>en</code> English, <code>ms</code> Malay,
       <code>id</code> Indonesian, <code>zh</code> Chinese,
-      <code>ta</code> Tamil, <code>tu</code> Telugu (yes, <code>tu</code>).
-      Use the language of the label.
+      <code>ta</code> Tamil, <code>tu</code> Telugu (yes, <code>tu</code>). Use
+      the language of the label.
     </li>
   </ul>
 
   <h2 id="output">Output</h2>
   <ul>
     <li>
-      Give the whole file in one <code>yaml</code> code block. If you can
-      create files, also offer it as a download named after the topic, for
-      example <code>snack-time.yaml</code>.
+      Give the whole file in one <code>yaml</code> code block. If you can create
+      files, also offer it as a download named after the topic, for example{" "}
+      <code>snack-time.yaml</code>.
     </li>
     <li>
       Then tell the user, in their language, how to use it: save it as a
       <code>.yaml</code> file; open it at
-      <a href="/builder/">gibtalk.com/builder</a> with <strong>Open a file</strong>
+      <a href="/builder/">gibtalk.com/builder</a> with{" "}
+      <strong>Open a file</strong>
       to check the pictures, change anything and print; or in the GibTalk app,
       tap <strong>Edit</strong>, type the four numbers shown, then
       <strong>More → Templates → Import from file</strong>.
     </li>
     <li>
-      Mention any word where you found no good picture, so they can choose
-      one in the builder.
+      Mention any word where you found no good picture, so they can choose one
+      in the builder.
     </li>
   </ul>
 </Base>
