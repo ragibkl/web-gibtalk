@@ -1,0 +1,148 @@
+---
+import Base from "../layouts/Base.astro";
+
+// Instructions for AI assistants (ChatGPT, Claude, Gemini...) that a parent or
+// teacher asks to make a GibTalk word file. Written to be read by the AI.
+const lookup = "https://api.gibtalk.com/api/symbols/lookup/";
+const example = `- label: Makan
+  language: ms
+  uri: https://api.gibtalk.com/media/tawasol-symbols/eat/eat-01.png
+  children:
+    - label: nasi
+      language: ms
+      uri: https://api.gibtalk.com/media/mulberry-symbols/rice.png
+    - label: air
+      language: ms
+      uri: https://api.gibtalk.com/media/mulberry-symbols/water.png
+    - label: nak lagi
+      language: ms
+      uri: https://api.gibtalk.com/media/mulberry-symbols/more.png`;
+const reply = `[
+  {"word": "rice", "candidates": [
+    {"name": "rice", "url": "https://api.gibtalk.com/media/mulberry-symbols/rice.png"},
+    {"name": "rice and clams", "url": "https://api.gibtalk.com/media/arasaac-symbols/rice%20and%20clams.png"}
+  ]},
+  {"word": "water", "candidates": [ ... ]}
+]`;
+---
+
+<Base
+  title="Making GibTalk word files with AI"
+  description="Instructions for AI assistants making GibTalk word files with real symbols."
+>
+  <h1>Making GibTalk word files with AI</h1>
+  <p class="muted">
+    This page is written for AI assistants. If you are a parent or teacher, copy
+    the prompt below into your AI chat; it tells the AI to read this page.
+  </p>
+
+  <h2 id="prompt">For parents and teachers: the prompt</h2>
+  <pre><code>Read https://gibtalk.com/ai and follow it to make me a GibTalk word file.
+Topic: snack time
+Language: Malay
+Who it's for: a 5-year-old who is starting to use AAC
+About 20 words.</code></pre>
+  <p>
+    Change the last four lines to what you need. Don't put your child's name or
+    medical details in the chat. Always check the result: open the file in the
+    <a href="/builder/">template builder</a> to see every picture before you
+    print it or add it to the app.
+  </p>
+
+  <h2 id="task">For the AI: your task</h2>
+  <p>
+    GibTalk is a free AAC (talking picture board) app. Make the user a word file
+    they can open in the app or at gibtalk.com/builder. Follow these steps.
+  </p>
+  <ol>
+    <li>
+      If the topic, language or who it's for is missing, ask once, briefly.
+      Otherwise go ahead.
+    </li>
+    <li>
+      Choose the words. Keep labels short (one to three words), in the user's
+      language, the way the child or family would say them. Include a few core
+      words that fit the topic (for example want, more, finished, help, stop,
+      yes, no). Group them into folders of about 6 to 20 words if there are many.
+    </li>
+    <li>
+      Find a picture for every word and folder with the symbol lookup below.
+      This step is required: only use picture URLs that the lookup returned.
+    </li>
+    <li>
+      Write the file in the format below and give it to the user (see
+      <a href="#output">Output</a>).
+    </li>
+  </ol>
+
+  <h2 id="lookup">Finding pictures: the symbol lookup</h2>
+  <p>Call this URL with English search words, separated by commas:</p>
+  <pre><code>{lookup}?q=rice,water,more,all%20done</code></pre>
+  <ul>
+    <li>
+      Search in <strong>English</strong>, even when the labels are in another
+      language: label "nasi", search "rice".
+    </li>
+    <li>Up to 60 words per call. Write spaces as <code>%20</code>.</li>
+    <li>
+      The reply lists the top 5 symbols for each word, by name:
+      <pre><code>{reply}</code></pre>
+    </li>
+    <li>
+      Pick the candidate whose <strong>name</strong> best fits the meaning of
+      the label. Copy its <code>url</code> exactly as given.
+    </li>
+    <li>
+      If no candidate fits (or the list is empty), look up a simpler word or
+      a synonym: "finished" → "finish", "all done", "done"; "toilet" →
+      "bathroom". Try two or three words before giving up.
+    </li>
+    <li>
+      If nothing fits, use <code>uri: ""</code>. The user can choose a picture
+      in the builder. Never make up a picture URL or change one.
+    </li>
+  </ul>
+
+  <h2 id="format">The file format</h2>
+  <p>
+    A YAML list of words. Each word has <code>label</code>,
+    <code>language</code> and <code>uri</code> (its picture). A folder is a
+    word with <code>children</code>: a list of more words. Folders can hold
+    folders.
+  </p>
+  <pre><code>{example}</code></pre>
+  <ul>
+    <li>
+      Put everything inside <strong>one top-level folder</strong> named after
+      the topic, as above. In the app it becomes one new folder on Home.
+    </li>
+    <li>
+      <code>language</code> is the voice that speaks the label:
+      <code>en</code> English, <code>ms</code> Malay,
+      <code>id</code> Indonesian, <code>zh</code> Chinese,
+      <code>ta</code> Tamil, <code>tu</code> Telugu (yes, <code>tu</code>).
+      Use the language of the label.
+    </li>
+  </ul>
+
+  <h2 id="output">Output</h2>
+  <ul>
+    <li>
+      Give the whole file in one <code>yaml</code> code block. If you can
+      create files, also offer it as a download named after the topic, for
+      example <code>snack-time.yaml</code>.
+    </li>
+    <li>
+      Then tell the user, in their language, how to use it: save it as a
+      <code>.yaml</code> file; open it at
+      <a href="/builder/">gibtalk.com/builder</a> with <strong>Open a file</strong>
+      to check the pictures, change anything and print; or in the GibTalk app,
+      tap <strong>Edit</strong>, type the four numbers shown, then
+      <strong>More → Templates → Import from file</strong>.
+    </li>
+    <li>
+      Mention any word where you found no good picture, so they can choose
+      one in the builder.
+    </li>
+  </ul>
+</Base>
