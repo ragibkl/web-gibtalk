@@ -5,6 +5,9 @@ on:
     branches: ["master"]
   pull_request:
     branches: ["master"]
+  # The templates page is built from api.gibtalk.com: run this after a new
+  # template is deployed there.
+  workflow_dispatch:
 
 jobs:
   # Builds the site before anything is published. The content schema fails the
