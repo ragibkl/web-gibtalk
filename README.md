@@ -7,7 +7,10 @@ Built with [Astro](https://astro.build) as a static site, served by nginx.
 
 - `/` - what GibTalk is, and where to get it
 - `/templates/` - the ready-made word sets, read at build time from
-  `templates/` in the GibTalk repo (rebuild to pick up new ones)
+  api.gibtalk.com (`/api/templates`). The builder's "Start from a template"
+  is baked in at build time too, pictures included, so after a template or
+  its pictures change on the API, deploy a new image of this site (a new
+  commit; the manual workflow run rebuilds the same image tag)
 - `/symbols/` - symbol search, API docs, and the symbol libraries' licences
 - `/privacy/` - the app's privacy policy
 
