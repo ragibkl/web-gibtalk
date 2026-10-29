@@ -7,7 +7,6 @@ import { SITE } from "../lib/site";
 import empty from "../assets/manual/empty.png";
 import main from "../assets/manual/main.png";
 import sentence from "../assets/manual/sentence.png";
-import parentCheck from "../assets/manual/parent-check.png";
 import editMode from "../assets/manual/edit-mode.png";
 import moreMenu from "../assets/manual/more-menu.png";
 import wordEditor from "../assets/manual/word-editor.png";
@@ -134,16 +133,10 @@ const shot = {
 
   <h2 id="edit-mode">2. Edit mode</h2>
   <p>
-    Changes happen in edit mode, behind a simple check so children don't change
-    words by accident. Tap <strong>Edit</strong>, type the four numbers shown,
-    and tap <strong>Ok</strong>. (On a tablet, close the on-screen keyboard
-    first if it covers the Ok button.)
+    Changes happen in edit mode. Tap <strong>Edit</strong> to start. (Versions
+    before 1.0.23 first ask you to type four numbers shown and tap
+    <strong>Ok</strong>.)
   </p>
-  <Image
-    src={parentCheck}
-    alt="A box over the board says 'Please input 3075 to continue', with a text field and an Ok button"
-    {...shot}
-  />
   <p>In edit mode, each tile gets three small buttons:</p>
   <Image
     src={editMode}
