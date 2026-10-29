@@ -1,61 +1,15 @@
-// Ready-made word sets, read at build time from the GibTalk symbols API (the
-// same templates the app offers). Rebuild the site to pick up new ones.
+// The template list from the GibTalk symbols API (the same templates the app
+// offers). The builder fetches it live in the browser; this build-time copy is
+// only its fallback if the API can't be reached.
 import { SITE } from "./site";
 
-export type Word = {
-  label: string;
-  language?: string;
-  uri?: string;
-  children?: Word[];
-};
+export type TemplateOption = { name: string; description: string; url: string };
 
-type TemplateSummary = {
-  id: string;
-  name: string;
-  description: string;
-  author: string;
-  language: string;
-  words: number;
-  url: string;
-};
+export const TEMPLATES_URL = `${SITE.api}/api/templates`;
 
-export type Template = Omit<TemplateSummary, "words"> & {
-  wordCount: number;
-  words: Word[];
-};
-
-async function getJson<T>(url: string): Promise<T> {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`${res.status} fetching ${url}`);
-  return (await res.json()) as T;
+export async function getTemplates(): Promise<TemplateOption[]> {
+  const res = await fetch(TEMPLATES_URL);
+  if (!res.ok) throw new Error(`${res.status} fetching ${TEMPLATES_URL}`);
+  const list = (await res.json()) as TemplateOption[];
+  return list.map(({ name, description, url }) => ({ name, description, url }));
 }
-
-let cache: Promise<Template[]> | undefined;
-
-export function getTemplates(): Promise<Template[]> {
-  cache ??= (async () => {
-    const list = await getJson<TemplateSummary[]>(`${SITE.api}/api/templates`);
-    return Promise.all(
-      list.map(async (summary) => {
-        const { words } = await getJson<{ words: Word[] }>(summary.url);
-        return { ...summary, wordCount: summary.words, words };
-      }),
-    );
-  })();
-  return cache;
-}
-
-/** Every word in a set, including those inside folders. */
-export function countWords(words: Word[]): number {
-  return words.reduce((n, w) => n + 1 + countWords(w.children ?? []), 0);
-}
-
-export const LANGUAGES: Record<string, string> = {
-  en: "English",
-  ms: "Malay",
-  id: "Indonesian",
-  zh: "Chinese",
-  ta: "Tamil",
-  te: "Telugu",
-  tu: "Telugu",
-};

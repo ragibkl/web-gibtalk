@@ -5,12 +5,9 @@ import { SITE } from "../lib/site";
 import { getTemplates } from "../lib/templates";
 import "../styles/builder.css";
 
-// The browser opens a template from the symbols API (CORS allowed).
-const templates = (await getTemplates()).map((t) => ({
-  name: t.name,
-  description: t.description,
-  url: t.url,
-}));
+// The browser refreshes this list and opens templates from the symbols API
+// (CORS allowed); the build-time list is the fallback.
+const templates = await getTemplates();
 ---
 
 <Base
@@ -30,8 +27,9 @@ const templates = (await getTemplates()).map((t) => ({
       and pick a symbol or use your own photo.
     </li>
     <li>
-      Or start from a <a href="/templates/">template</a>, or open a GibTalk
-      backup file to change it.
+      Or pick a ready-made template under{" "}
+      <strong>Start from a template…</strong>, or open a GibTalk backup file to
+      change it.
     </li>
     <li>Download the file when you're done.</li>
     <li>
@@ -59,9 +57,9 @@ const templates = (await getTemplates()).map((t) => ({
     Import from file <strong>adds</strong> the words at the end of Home and
     keeps the ones already there.
     <strong>More → Restore</strong> opens the same file but
-    <strong>replaces every word on the device</strong>, which suits setting up
-    a new device. (GibTalk versions before 1.0.19 only have Restore: update
-    the app first.)
+    <strong>replaces every word on the device</strong>, which suits setting up a
+    new device. (GibTalk versions before 1.0.19 only have Restore: update the
+    app first.)
   </p>
 
   <h2>Share it with other families</h2>

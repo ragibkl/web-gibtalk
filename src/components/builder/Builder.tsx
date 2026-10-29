@@ -24,8 +24,7 @@ import {
 import PrintSheet from "./PrintSheet";
 import SymbolSearch from "./SymbolSearch";
 import { photoToDataUri } from "./photo";
-
-export type TemplateOption = { name: string; description: string; url: string };
+import { TEMPLATES_URL, type TemplateOption } from "../../lib/templates";
 
 type Props = { templates: TemplateOption[] };
 
@@ -91,7 +90,8 @@ function loadDraft(): Draft | null {
   }
 }
 
-export default function Builder({ templates }: Props) {
+export default function Builder({ templates: builtTemplates }: Props) {
+  const [templates, setTemplates] = useState(builtTemplates);
   const [name, setName] = useState("");
   const [words, setWords] = useState<BuilderWord[]>([]);
   const [path, setPath] = useState<string[]>([]);
@@ -103,6 +103,17 @@ export default function Builder({ templates }: Props) {
   const [cols, setCols] = useState(5);
   const [printing, setPrinting] = useState<PrintPage[] | null>(null);
   const editorRef = useRef<HTMLDivElement>(null);
+
+  // The newest template list, so templates added to the API show up without
+  // rebuilding the site. Keeps the build-time list if the API is unreachable.
+  useEffect(() => {
+    fetch(TEMPLATES_URL)
+      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+      .then((list: TemplateOption[]) => {
+        if (list.length) setTemplates(list);
+      })
+      .catch(() => {});
+  }, []);
 
   // Restore the draft this browser was working on.
   useEffect(() => {
