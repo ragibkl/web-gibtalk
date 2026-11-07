@@ -7,11 +7,11 @@ const example = `${SITE.api}/api/symbols/search/?q=apple`;
 
 <Base
   title="Symbols"
-  description="Search about 16,700 free AAC symbols from ARASAAC, Mulberry and Tawasol, and use the GibTalk symbols API in your own projects."
+  description="Search about 16,200 free AAC symbols from ARASAAC, Mulberry and Tawasol, and use the GibTalk symbols API in your own projects."
 >
   <h1>Symbols</h1>
   <p class="lead">
-    GibTalk's pictures come from three open symbol libraries, about 16,700
+    GibTalk's pictures come from three open symbol libraries, about 16,200
     symbols in all. Search them here, the same way the app does.
   </p>
 
@@ -49,9 +49,9 @@ const example = `${SITE.api}/api/symbols/search/?q=apple`;
   </p>
   <pre><code>curl "{example}"</code></pre>
   <pre><code>{`[
-  { "url": "${SITE.api}/media/arasaac-symbols/apple.png" },
-  { "url": "${SITE.api}/media/mulberry-symbols/apple.png" },
-  { "url": "${SITE.api}/media/tawasol-symbols/Apple/Apple-01.png" }
+  { "name": "apple", "url": "${SITE.api}/media/arasaac-symbols/apple.png" },
+  { "name": "apple", "url": "${SITE.api}/media/mulberry-symbols/apple.png" },
+  { "name": "apple", "url": "${SITE.api}/media/tawasol-symbols/Apple/Apple-01.png" }
 ]`}</code></pre>
 
   <h3>Images</h3>
@@ -100,6 +100,11 @@ const example = `${SITE.api}/api/symbols/search/?q=apple`;
     return m ? m[1].charAt(0).toUpperCase() + m[1].slice(1) : "";
   }
 
+  // "want-variant-1" → "want"
+  function labelOf(name: string): string {
+    return name.replace(/-variant-\d+$/, "").replace(/[-_]/g, " ");
+  }
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const q = input.value.trim();
@@ -111,7 +116,7 @@ const example = `${SITE.api}/api/symbols/search/?q=apple`;
         `${API}/api/symbols/search/?q=${encodeURIComponent(q)}`,
       );
       if (!res.ok) throw new Error(String(res.status));
-      const symbols = (await res.json()) as { url: string }[];
+      const symbols = (await res.json()) as { name: string; url: string }[];
       status.textContent = symbols.length
         ? `${symbols.length} symbols for "${q}".`
         : `No symbols found for "${q}". Try a simpler word.`;
@@ -122,18 +127,15 @@ const example = `${SITE.api}/api/symbols/search/?q=apple`;
           a.href = s.url;
           const img = document.createElement("img");
           img.src = s.url;
-          img.alt =
-            s.url
-              .split("/")
-              .pop()
-              ?.replace(/[-_]/g, " ")
-              .replace(/\.png$/, "") ?? "";
+          img.alt = labelOf(s.name);
           img.loading = "lazy";
           img.width = 96;
           img.height = 96;
           const label = document.createElement("span");
-          label.textContent = libraryOf(s.url);
-          a.append(img, label);
+          label.textContent = labelOf(s.name);
+          const library = document.createElement("small");
+          library.textContent = libraryOf(s.url);
+          a.append(img, label, library);
           li.append(a);
           return li;
         }),
@@ -187,6 +189,16 @@ const example = `${SITE.api}/api/symbols/search/?q=apple`;
     color: #141414;
     text-decoration: none;
     font-size: 0.75rem;
+  }
+  .results :global(span),
+  .results :global(small) {
+    display: block;
+    width: 96px;
+    overflow-wrap: anywhere;
+  }
+  .results :global(small) {
+    font-size: 0.7rem;
+    opacity: 0.7;
   }
   .results :global(img) {
     display: block;
