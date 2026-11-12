@@ -6,12 +6,16 @@ The website for [GibTalk](https://github.com/ragibkl/GibTalk), a free AAC app, a
 Built with [Astro](https://astro.build) as a static site, served by nginx.
 
 - `/` - what GibTalk is, and where to get it
-- `/builder/` - the template builder. "Start from a template…" lists the
-  ready-made word sets live from api.gibtalk.com (`/api/templates`), so a new
-  template shows up without rebuilding the site (the list baked in at build
-  time is only a fallback). `/templates/` redirects here
+- `/manual/` - how to use the app, and the web app
+- `/support/` - questions and answers
 - `/symbols/` - symbol search, API docs, and the symbol libraries' licences
 - `/privacy/` - the app's privacy policy
+
+The template builder and the AI guide were retired in November 2026: the web
+app at [app.gibtalk.com](https://app.gibtalk.com)
+([ragibkl/app-gibtalk](https://github.com/ragibkl/app-gibtalk)) replaces the
+builder. nginx redirects `/builder/` and `/templates/` there, and `/ai/` to
+the home page.
 
 ## Develop
 

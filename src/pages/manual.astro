@@ -17,7 +17,7 @@ import voiceList from "../assets/manual/voice-list.png";
 import tamilFolder from "../assets/manual/tamil-folder.png";
 import languageList from "../assets/manual/language-list.png";
 import keyboard from "../assets/manual/keyboard.png";
-import builder from "../assets/manual/builder.png";
+import webApp from "../assets/manual/web-app.png";
 
 const shot = {
   widths: [640, 1100],
@@ -60,7 +60,7 @@ const shot = {
         <a href="#backup">Backup, restore and new devices</a>
       </li>
       <li>
-        <a href="#builder">Building and printing on a computer</a>
+        <a href="#computer">GibTalk on a computer</a>
       </li>
       <li>
         <a href="#tips">Tips for starting out</a>
@@ -313,8 +313,8 @@ const shot = {
     playground, school or feelings, in English, Malay and Tamil. In edit mode,
     tap
     <strong>More → Templates</strong> and pick one. On a computer, you can see
-    and print any of them in the <a href="/builder/">template builder</a>
-    (Start from a template…).
+    and print any of them in the <a href="https://app.gibtalk.com/">web app</a>
+    (Start from a template).
   </p>
   <Image
     src={templates}
@@ -332,8 +332,16 @@ const shot = {
   />
   <p>
     <strong>Import from file</strong> at the top of the same screen adds the
-    words from a file: a backup, a set made in the
-    <a href="/builder/">template builder</a>, or a file someone sent you.
+    words from a file: a backup, a set downloaded from the
+    <a href="https://app.gibtalk.com/">web app</a>, or a file someone sent you.
+  </p>
+  <p>
+    <strong>Open a shared set</strong>, on the same screen, adds a set someone
+    shared from the web app. Tap <strong>Scan QR code</strong> and point the
+    camera at the code on their screen, or paste the link they sent you. You see
+    the set's name and pictures first, then tap <strong>Add to GibTalk</strong>.
+    The words arrive as a new folder named after the set, so nothing you already
+    have changes.
   </p>
 
   <h2 id="backup">7. Backup, restore and new devices</h2>
@@ -364,34 +372,51 @@ const shot = {
     changes.
   </p>
 
-  <h2 id="builder">8. Building and printing on a computer</h2>
+  <h2 id="computer">8. GibTalk on a computer</h2>
   <p>
-    The <a href="/builder/">template builder</a> works in a browser on a laptop
-    or computer, with a bigger screen and a keyboard. It's handy for teachers
-    and therapists preparing words for several children.
+    <a href="https://app.gibtalk.com/">app.gibtalk.com</a> is GibTalk in a
+    browser on a laptop or computer, with a bigger screen and a keyboard. It's
+    handy for teachers and therapists preparing words for several children, and
+    for showing a board to a whole class. Nothing to install, and no account.
   </p>
   <Image
-    src={builder}
-    alt="The template builder: a name field, buttons to download, open a file or start from a template, the print row with rows and columns, and the words grid"
+    src={webApp}
+    alt="The web app showing the Mealtime set: a sentence bar with I, want, more at the top, buttons for Edit, Share, Print, Full screen and My sets, and a grid of green word tiles"
     widths={[640, 925]}
     sizes="(max-width: 58rem) 100vw, 58rem"
     class="shot"
   />
   <ul>
     <li>
-      Add words and folders, and pick symbols or upload photos, much like in the
-      app. You can also start from a template or open a backup.
+      <strong>My sets:</strong> start a new set, start from a template, or open
+      a GibTalk file. Sets are kept in that browser, on that computer.
     </li>
     <li>
-      <strong>Download file</strong>, send it to the device, and use
+      <strong>Talking:</strong> click words to hear them and build a sentence,
+      just like the app. <strong>Full screen</strong> works well on a projector,
+      for song time or the end of class.
+    </li>
+    <li>
+      <strong>Edit:</strong> add words and folders, pick symbols or upload
+      photos, and drag words to reorder them.
+    </li>
+    <li>
+      <strong>Share</strong> gives a link and a QR code. On the phone or tablet,
+      use <a href="#templates">Templates → Open a shared set</a> to scan it.
+      <strong>Show big</strong> fills the screen with the code, so a room can
+      scan it from a projector. Photos you uploaded are not included in the
+      link; symbols are.
+    </li>
+    <li>
+      <strong>Download</strong> (in My sets) saves a file with everything,
+      photos too. Send it to the device and use
       <strong>Templates → Import from file</strong> (adds the words) or
       <strong>Restore</strong> (replaces all words).
     </li>
     <li>
-      <strong>Printing:</strong> choose the rows and columns, for example 6 × 9
-      for a core board. <strong>Print this folder</strong> prints the folder on
-      screen as one board; <strong>Print all as a book</strong> puts each folder
-      on its own page, with page numbers to follow. Pages are A4 landscape, and
+      <strong>Print:</strong> print the page on screen as one board, or the
+      whole set as a book with each folder on its own page. Choose the rows and
+      columns, for example 6 × 9 for a core board. Pages are A4 landscape, and
       the print window can save a PDF. Printed boards are useful in class,
       outdoors, or when the tablet is charging.
     </li>
