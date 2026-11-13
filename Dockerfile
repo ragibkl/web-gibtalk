@@ -1,5 +1,5 @@
 # builder
-FROM node:24.22.2-slim AS builder
+FROM node:24.22.3-slim AS builder
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
